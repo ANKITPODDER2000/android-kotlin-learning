@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="title_activity_greet_user">GreetUser</string>
+    <string name="title_activity_greetuser">Greetuser</string>
+</resources>
