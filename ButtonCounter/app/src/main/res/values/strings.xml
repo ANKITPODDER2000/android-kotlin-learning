@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Button Counter</string>
+    <string name="button">Click Me</string>
+    <string name="cancelBtn">Cancel</string>
+    <string name="okayBtn">Ok</string>
+    <string name="editTextValue">
+        Ankit Podder\nAnkit Podder\n
+    </string>
+</resources>
