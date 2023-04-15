@@ -33,6 +33,16 @@ class MainActivity : AppCompatActivity() {
             ans += if (binding.cbSalad.isChecked) "Salad\n" else ""
 
             GlobalScope.launch(Dispatchers.Main) {
+
+                /*
+                val t: Toast = Toast(this@MainActivity).apply {
+                    duration = Toast.LENGTH_SHORT
+                    view = layoutInflater.inflate(R.layout.toast_screen, findViewById(R.id.clToastContainer))
+                }
+                t.show()
+                Log.d("Toast", t.view.toString())
+                 */
+
                 binding.ivChecf.visibility = VISIBLE
                 binding.tvBurger.text = ""
                 Toast.makeText(view.context, "Cooking your Burger...", Toast.LENGTH_SHORT).show()
