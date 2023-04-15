@@ -23,5 +23,12 @@ class MainActivity : AppCompatActivity() {
         val adapter = TodoAdapter(todos)
         binding.rvTodos.adapter = adapter
         binding.rvTodos.layoutManager = LinearLayoutManager(this)
+
+        binding.btnAdd.setOnClickListener {
+            if(binding.etTitle.text.toString() != "") {
+                todos.add(Todo(binding.etTitle.text.toString(), false))
+                adapter.notifyItemChanged(todos.size-1)
+            }
+        }
     }
 }
