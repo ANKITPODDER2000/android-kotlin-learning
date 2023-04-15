@@ -1,0 +1,33 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color purple_200
+color purple_500
+color purple_700
+color teal_200
+color teal_700
+color white
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+drawable img
+id btnGiveMyBurger
+id cbCheese
+id cbOnion
+id cbSalad
+id clToastContainer
+id ivChecf
+id rbRec1
+id rbRec2
+id rbRec3
+id rgRec
+id textView
+id textView2
+id tvBurger
+layout activity_main
+layout toast_screen
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+style Theme.BurgerProject
+xml backup_rules
+xml data_extraction_rules

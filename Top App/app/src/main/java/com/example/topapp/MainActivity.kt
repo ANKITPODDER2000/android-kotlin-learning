@@ -1,6 +1,5 @@
 package com.example.topapp
 
-import android.content.Context
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -24,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        private class DownloadData(val context : Context, var listView : ListView) : AsyncTask<String, Void, String>() {
+        private class DownloadData(val context: MainActivity, var listView: ListView) : AsyncTask<String, Void, String>() {
             override fun doInBackground(vararg urlPath: String?): String {
                 return URL(urlPath[0]).readText();
             }

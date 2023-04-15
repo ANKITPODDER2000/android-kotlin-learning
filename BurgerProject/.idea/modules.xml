@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BurgerProject.iml" filepath="$PROJECT_DIR$/.idea/modules/BurgerProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/BurgerProject.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/BurgerProject.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/BurgerProject.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/BurgerProject.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/BurgerProject.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/BurgerProject.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/BurgerProject.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/BurgerProject.app.unitTest.iml" />
+    </modules>
+  </component>
+</project>
