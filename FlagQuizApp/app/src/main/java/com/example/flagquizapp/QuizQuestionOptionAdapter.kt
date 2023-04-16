@@ -1,33 +1,51 @@
-package com.example.flagquizapp
-
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Adapter
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.example.flagquizapp.R
+import com.example.flagquizapp.databinding.QuizQuestionOptionBinding
 
 class QuizQuestionOptionAdapter(
-    val options: List<String>,
-) : Adapter<QuizQuestionOptionAdapter.QuizQuestionOptionViewHolder>() {
-    inner class QuizQuestionOptionViewHolder(val view: View) : ViewHolder(view)
+    private val options: List<String>,
+) : RecyclerView.Adapter<QuizQuestionOptionAdapter.QuizQuestionOptionViewHolder>() {
+
+    private var currentSelectedPosition = RecyclerView.NO_POSITION
+
+    inner class QuizQuestionOptionViewHolder(val binding: QuizQuestionOptionBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
     ): QuizQuestionOptionViewHolder {
-        return QuizQuestionOptionViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.quiz_question_option, parent, false)
-        )
+        val binding =
+            QuizQuestionOptionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return QuizQuestionOptionViewHolder(binding)
     }
 
     override fun getItemCount(): Int = options.size
 
-    override fun onBindViewHolder(holder: QuizQuestionOptionViewHolder, position: Int) {
-        holder.view.findViewById<TextView>(R.id.tvOption).text = options[position]
-    }
+    override fun onBindViewHolder(
+        holder: QuizQuestionOptionViewHolder,
+        @SuppressLint("RecyclerView") position: Int,
+    ) {
+        val option = holder.binding.tvOption
+        option.text = options[position]
 
+
+        option.background = ContextCompat.getDrawable(
+            holder.binding.root.context,
+            if (currentSelectedPosition == position) R.drawable.ic_background_border_select else R.drawable.ic_background_border
+        )
+
+
+        option.setOnClickListener {
+            val previouslySelectedPosition = currentSelectedPosition
+            currentSelectedPosition = position
+            notifyItemChanged(previouslySelectedPosition)
+            notifyItemChanged(currentSelectedPosition)
+        }
+    }
 
 }
