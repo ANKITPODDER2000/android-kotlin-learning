@@ -3,11 +3,14 @@ package com.example.flagquizapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Toast
+import com.example.flagquizapp.data.getQuestion
 import com.example.flagquizapp.databinding.ActivityMainBinding
 
+private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +27,9 @@ class MainActivity : AppCompatActivity() {
             }
             else {
                 nextActivityIntent.also {
+                    val question = getQuestion(1)
+                    Log.d(TAG, question.toString())
+                    it.putExtra("EXTRA_QUESTION",question)
                     startActivity(it)
                 }
             }
