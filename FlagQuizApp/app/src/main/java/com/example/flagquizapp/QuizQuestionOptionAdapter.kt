@@ -1,9 +1,10 @@
+package com.example.flagquizapp
+
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.flagquizapp.R
 import com.example.flagquizapp.databinding.QuizQuestionOptionBinding
 
 class QuizQuestionOptionAdapter(
@@ -30,22 +31,21 @@ class QuizQuestionOptionAdapter(
         holder: QuizQuestionOptionViewHolder,
         @SuppressLint("RecyclerView") position: Int,
     ) {
-        val option = holder.binding.tvOption
-        option.text = options[position]
-
-
-        option.background = ContextCompat.getDrawable(
-            holder.binding.root.context,
-            if (currentSelectedPosition == position) R.drawable.ic_background_border_select else R.drawable.ic_background_border
-        )
-
-
-        option.setOnClickListener {
-            val previouslySelectedPosition = currentSelectedPosition
-            currentSelectedPosition = position
-            notifyItemChanged(previouslySelectedPosition)
-            notifyItemChanged(currentSelectedPosition)
+        holder.binding.tvOption.apply {
+            text = options[position]
+            // check whether this option is clicked or not
+            background = ContextCompat.getDrawable(
+                holder.binding.root.context,
+                if (currentSelectedPosition == position) R.drawable.ic_background_border_select
+                else R.drawable.ic_background_border
+            )
+            // Add setOnClickListener
+            setOnClickListener {
+                val previouslySelectedPosition = currentSelectedPosition
+                currentSelectedPosition = position
+                notifyItemChanged(previouslySelectedPosition)
+                notifyItemChanged(currentSelectedPosition)
+            }
         }
     }
-
 }
