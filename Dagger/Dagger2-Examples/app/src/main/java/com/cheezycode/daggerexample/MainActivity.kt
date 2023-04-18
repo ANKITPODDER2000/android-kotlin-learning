@@ -7,11 +7,19 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var userRegistrationServiceComponent: UserRegistrationService
+
+    @Inject
+    lateinit var notificationService: NotificationService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val component = DaggerUserRegistrationServiceComponent.builder().build()
-        component.getUserRegistrationService().registerUser("ankit", "ankit@demo.com")
+        component.inject(this@MainActivity)
+        // component.getUserRegistrationService().registerUser("ankit", "ankit@demo.com")
+
+        userRegistrationServiceComponent.registerUser("Ankit", "ankit@demo.com")
+        notificationService.sendMail("ankit@demo.com")
     }
 }
