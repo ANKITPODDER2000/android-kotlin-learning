@@ -2,7 +2,7 @@ package com.cheezycode.daggerexample
 
 import dagger.Component
 
-@Component
+@Component(modules = [UserRepositoryModule::class, NotificationServiceModule::class])
 interface UserRegistrationServiceComponent {
     // fun getUserRegistrationService(): UserRegistrationService
     // fun getNotificationService() : NotificationService
