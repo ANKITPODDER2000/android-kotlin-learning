@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Theme.FlagQuizApp.Layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".QuizQuestionActivity">
@@ -26,6 +27,13 @@
 
         <com.example.flagquizapp.SvgImageView
             android:id="@+id/ivFlag"
+            android:layout_width="200dp"
+            android:layout_height="120dp"
+            android:visibility="gone"
+            tools:src="@drawable/ic_flag_of_argentina" />
+
+        <ImageView
+            android:id="@+id/ivFlagPng"
             android:layout_width="200dp"
             android:layout_height="120dp"
             tools:src="@drawable/ic_flag_of_argentina" />
@@ -64,10 +72,14 @@
             android:layout_marginBottom="20dp" />
 
         <Button
+            android:id="@+id/btnCheckAns"
+            style="@style/Theme.FlagQuizApp.BtnColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Submit"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:text="Submit" />
     </LinearLayout>
 
 </ScrollView>

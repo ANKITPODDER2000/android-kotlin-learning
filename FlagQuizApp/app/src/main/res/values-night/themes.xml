@@ -13,4 +13,14 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.FlagQuizApp.Layout">
+        <item name="android:background">@color/primary_dark</item>
+    </style>
+
+    <style name="Theme.FlagQuizApp.BtnColor">
+        <item name="android:backgroundTint">#a0a5b0</item>
+        <item name="android:textColor">@color/primary_dark</item>
+        <item name="android:textSize">20sp</item>
+    </style>
 </resources>

@@ -119,11 +119,15 @@ val countryFlagsMap = mapOf(
     "Paraguay" to "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Flag_of_Paraguay.svg/1280px-Flag_of_Paraguay.svg.png"
 )
 
-fun getCountry(existingCountry: List<String>): String{
+fun getCountry(existingCountry: List<List<String>>): String{
     val randomCountry =
         { countryFlagsMap.keys.elementAt(Random.nextInt(0, countryFlagsMap.keys.size)) }
+    val ec: MutableList<String> = mutableListOf()
+    for(country in existingCountry){
+        ec.add(country[0])
+    }
     var countryName: String = randomCountry()
-    while (countryName in existingCountry) {
+    while (countryName in ec) {
         countryName = randomCountry()
     }
     return countryName

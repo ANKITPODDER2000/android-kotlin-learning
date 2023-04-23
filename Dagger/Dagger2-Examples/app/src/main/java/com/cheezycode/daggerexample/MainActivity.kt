@@ -1,6 +1,7 @@
 package com.cheezycode.daggerexample
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import javax.inject.Inject
 
@@ -21,5 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         userRegistrationServiceComponent.registerUser("Ankit", "ankit@demo.com")
         notificationService.sendMail("ankit@demo.com")
+
+        Log.d("MainActivity", "Done")
     }
 }
