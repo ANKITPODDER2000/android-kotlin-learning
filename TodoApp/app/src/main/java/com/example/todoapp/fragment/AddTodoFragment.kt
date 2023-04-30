@@ -15,6 +15,8 @@ import com.example.todoapp.databinding.FragmentAddTodoBinding
 import com.example.todoapp.model.NewTodoViewModel
 import com.example.todoapp.model.Todo
 import com.example.todoapp.model.TodoViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class AddTodoFragment(private val todoViewModel: TodoViewModel) : Fragment() {
     override fun onCreateView(
@@ -29,7 +31,7 @@ class AddTodoFragment(private val todoViewModel: TodoViewModel) : Fragment() {
         binding.todoViewModel = todoViewModel
 
         binding.btnAddTodo.setOnClickListener {
-            if(newTodoViewModel.isValid()) {
+            if (newTodoViewModel.isValid()) {
                 todoViewModel.addNewTodo(
                     Todo(
                         newTodoViewModel.todoTitle,
@@ -41,9 +43,9 @@ class AddTodoFragment(private val todoViewModel: TodoViewModel) : Fragment() {
                 )
                 newTodoViewModel.resetAllItems()
                 (requireActivity() as MainActivity).binding.bnNavBar.selectedItemId = R.id.home
-            }
-            else {
-                Toast.makeText(this.context, "Please Provide Todo details", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this.context, "Please Provide Todo details", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
