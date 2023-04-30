@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragment.AddTodoFragment">
+    <data>
+        <variable
+            name="newTodo"
+            type="com.example.todoapp.model.NewTodoViewModel" />
+        <variable
+            name="todoViewModel"
+            type="com.example.todoapp.model.TodoViewModel" />
+    </data>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            android:paddingBottom="100dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvTodo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:text="Add Todo"
+                    android:textAlignment="center"
+                    android:textSize="40sp"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="Todo Title"
+                    android:textSize="20sp" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:background="#0AFFFFFF"
+                    android:hint="Solve Math Problem"
+                    android:text="@={newTodo.todoTitle}"
+                    android:padding="10dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="Todo Description"
+                    android:textSize="20sp" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/ThemeOverlay.Material3.TextInputEditText.FilledBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#0AFFFFFF"
+                    android:gravity="top|start"
+                    android:hint="Todo Description"
+                    android:lines="10"
+                    android:padding="10dp"
+                    android:text="@={newTodo.todoDescription}"
+                    android:scrollbars="vertical" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="Todo Description"
+                    android:textSize="20sp" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#0AFFFFFF"
+                    android:hint="Due Date"
+                    android:inputType="date"
+                    android:padding="10dp"
+                    android:text="@={newTodo.todoDueDate}"
+                    android:textSize="20sp" />
+
+                <Button
+                    android:id="@+id/btnAddTodo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="#0AFFFFFF"
+                    android:text="Create Todo"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </FrameLayout>
+</layout>
