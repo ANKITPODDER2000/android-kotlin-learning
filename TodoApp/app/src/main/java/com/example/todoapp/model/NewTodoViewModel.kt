@@ -6,14 +6,14 @@ import java.util.Date
 class NewTodoViewModel: ViewModel() {
     var todoTitle = ""
     var todoDescription = ""
-    var todoStartDate = Date()
+    var todoStartDate = Date().toString()
     var todoDueDate = Date().toString()
     var todoStatus = TodoStatus.NOT_STARTED
 
     fun resetAllItems() {
         todoTitle = ""
         todoDescription = ""
-        todoStartDate = Date()
+        todoStartDate = Date().toString()
         todoDueDate = Date().toString()
         todoStatus = TodoStatus.NOT_STARTED
     }

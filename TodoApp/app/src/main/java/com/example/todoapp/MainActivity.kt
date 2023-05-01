@@ -4,10 +4,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.room.Room
 import com.example.todoapp.databinding.ActivityMainBinding
 import com.example.todoapp.fragment.AddTodoFragment
 import com.example.todoapp.fragment.HomeFragment
 import com.example.todoapp.fragment.ProfileFragment
+import com.example.todoapp.model.TodoDataBase
 import com.example.todoapp.model.TodoViewModel
 import com.example.todoapp.model.TodoViewModelFactory
 
@@ -18,12 +20,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val todoViewModel = ViewModelProvider(this, TodoViewModelFactory(this))[TodoViewModel::class.java]
+        val todoViewModel = ViewModelProvider(this, TodoViewModelFactory(applicationContext))[TodoViewModel::class.java]
 
         val homeFragment = HomeFragment(todoViewModel)
         val addTodoFragment = AddTodoFragment(todoViewModel)
         val profileFragment = ProfileFragment()
-
         replaceFragment(homeFragment)
 
         binding.bnNavBar.setOnNavigationItemSelectedListener {
@@ -34,7 +35,6 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-        binding.bnNavBar.selectedItemId = R.id.account
     }
 
     private fun replaceFragment(fragment: Fragment) {
