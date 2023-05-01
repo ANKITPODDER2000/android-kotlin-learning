@@ -1,20 +1,26 @@
 package com.example.todoapp.model
 
+import android.content.Context
+import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.room.Room
+import androidx.room.RoomDatabase
 import java.util.Date
 
-class TodoViewModel : ViewModel() {
-    private var _todos: MutableLiveData<List<Todo>> = MutableLiveData<List<Todo>>(
-        listOf(
-            Todo("Learn DSA", "Complete Tree", Date(), Date().toString(), TodoStatus.IN_PROGRESS),
-            Todo("Learn DSA", "Complete Tree", Date(), Date().toString(), TodoStatus.IN_PROGRESS)
-        )
-    )
+class TodoViewModel(context: Context) : ViewModel() {
+    private val db = TodoDataBase.getInstance(context)
+    private val dbDao = db.getTodoDao()
+    private var _todos: LiveData<List<Todo>> = dbDao.getAllTodo()
     val todos
         get() = _todos
 
-    fun addNewTodo(todo: Todo) {
-        _todos.value = _todos.value?.plus(todo)
+
+    suspend fun addNewTodo(todo: Todo) {
+        dbDao.upsertTodo(todo)
+    }
+    suspend fun deleteTodo(todo: Todo) {
+        dbDao.deleteTodo(todo)
     }
 }
