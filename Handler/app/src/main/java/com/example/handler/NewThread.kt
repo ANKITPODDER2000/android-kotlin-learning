@@ -1,11 +1,12 @@
 package com.example.handler
 
 import android.os.Handler
+import android.os.HandlerThread
 import android.os.Message
 import android.util.Log
 import com.example.handler.databinding.ActivityMainBinding
 
-class NewThread(val binding: ActivityMainBinding, val handler: Handler) : Thread() {
+class NewThread(val binding: ActivityMainBinding, val handler: Handler) : HandlerThread("MainThread") {
     var isStopped = false
     override fun run() {
         binding.tvTitle.text = "Start thread..."
