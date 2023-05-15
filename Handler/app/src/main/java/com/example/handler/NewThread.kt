@@ -5,7 +5,7 @@ import android.os.Looper
 import android.util.Log
 import com.example.handler.databinding.ActivityMainBinding
 
-class NewThread(val binding: ActivityMainBinding) : Thread() {
+class NewThread(val binding: ActivityMainBinding, val handler: Handler) : Thread() {
     var isStopped = false
     override fun run() {
         binding.tvTitle.text = "Start thread..."
@@ -18,9 +18,8 @@ class NewThread(val binding: ActivityMainBinding) : Thread() {
             )
             Thread.sleep(1000)
             i++
-            Handler(Looper.getMainLooper()).post {
-                binding.tvCount.text = "Count: $i"
-            }
+            val runnable = Runnable { binding.tvCount.text = "Count: $i" }
+            handler.post(runnable)
         }
     }
 }
