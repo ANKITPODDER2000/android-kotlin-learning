@@ -1,5 +1,6 @@
 package com.example.handler
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
@@ -12,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val handler = Handler()
+        val handler = NewHandler(this as Context)
         var thread = NewThread(binding, handler)
 
         binding.btnStart.setOnClickListener {
