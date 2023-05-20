@@ -1,10 +1,9 @@
-package com.example.recyclerviewandaudioplayer
+package com.example.recyclerviewandaudioplayer.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.recyclerviewandaudioplayer.databinding.ActivityListBinding
 import com.example.recyclerviewandaudioplayer.databinding.WordTopicListBinding
 import com.example.recyclerviewandaudioplayer.viewmodels.Word
 

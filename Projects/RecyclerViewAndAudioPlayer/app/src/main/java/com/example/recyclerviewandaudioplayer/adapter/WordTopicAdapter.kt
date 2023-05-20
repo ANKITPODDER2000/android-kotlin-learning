@@ -1,4 +1,4 @@
-package com.example.recyclerviewandaudioplayer
+package com.example.recyclerviewandaudioplayer.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

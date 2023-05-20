@@ -1,13 +1,12 @@
-package com.example.recyclerviewandaudioplayer
+package com.example.recyclerviewandaudioplayer.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.recyclerviewandaudioplayer.adapter.WordTopicAdapter
 import com.example.recyclerviewandaudioplayer.databinding.ActivityMainBinding
-import com.example.recyclerviewandaudioplayer.databinding.WordTopicBinding
 import com.example.recyclerviewandaudioplayer.viewmodels.WordTopicViewModel
 
 class MainActivity : AppCompatActivity(), WordTopicAdapter.OnClickListener {

@@ -1,9 +1,10 @@
-package com.example.recyclerviewandaudioplayer
+package com.example.recyclerviewandaudioplayer.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.recyclerviewandaudioplayer.adapter.WordTopicListAdapter
 import com.example.recyclerviewandaudioplayer.databinding.ActivityListBinding
 import com.example.recyclerviewandaudioplayer.viewmodels.Word
 import com.example.recyclerviewandaudioplayer.viewmodels.WordTopicViewModel
