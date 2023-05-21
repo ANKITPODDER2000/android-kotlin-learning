@@ -13,7 +13,7 @@ class WordTopicListAdapter(val wordTopicList: List<Word>, val onClickPlayMusic: 
     RecyclerView.Adapter<WordTopicListAdapter.WordTopicListViewHolder>() {
 
     interface OnClickPlayMusic {
-        fun onClickPlayMusic(position: Int, @RawRes musicRes: Int)
+        fun onClickPlayMusic(position: Int, @RawRes musicRes: Int?)
     }
 
     class WordTopicListViewHolder(val binding: WordTopicListBinding) :

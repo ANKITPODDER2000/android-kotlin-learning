@@ -1,7 +1,8 @@
 package com.example.recyclerviewandaudioplayer.activity
 
+import android.media.MediaPlayer
 import android.os.Bundle
-import android.widget.Toast
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,11 @@ class ListActivity : AppCompatActivity(), WordTopicListAdapter.OnClickPlayMusic 
     private lateinit var binding: ActivityListBinding
     private lateinit var wordTopicList: List<Word>
     private lateinit var wordTopicViewModel: WordTopicViewModel
+    private lateinit var title: String
+    private lateinit var wordTopicListAdapter: WordTopicListAdapter
+    @Volatile
+    private var prevClickedPosition = -1
+    private lateinit var mediaPlayer: MediaPlayer
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,23 +29,44 @@ class ListActivity : AppCompatActivity(), WordTopicListAdapter.OnClickPlayMusic 
         setContentView(binding.root)
         initializeLayout()
 
-        binding.rvWordTopicList.adapter = WordTopicListAdapter(wordTopicList, this)
+        wordTopicListAdapter = WordTopicListAdapter(wordTopicList, this)
+        binding.rvWordTopicList.adapter = wordTopicListAdapter
         binding.rvWordTopicList.layoutManager = LinearLayoutManager(this)
-
-
     }
 
     private fun initializeLayout() {
-        val title = intent.getStringExtra("EXTRA_TITLE")
-        binding.tvTitle.text = title ?: "All List..."
-        binding.ivBtnBack.setOnClickListener{
+        title = intent.getStringExtra("EXTRA_TITLE") ?: "All List..."
+        binding.tvTitle.text = title
+        binding.ivBtnBack.setOnClickListener {
             finish()
         }
         wordTopicViewModel = ViewModelProvider(this)[WordTopicViewModel::class.java]
-        wordTopicList = if(title != null) wordTopicViewModel.getWordTopicList(title) else listOf()
+        wordTopicList = wordTopicViewModel.getWordTopicList(title)
     }
 
-    override fun onClickPlayMusic(position: Int, musicRes: Int) {
-        Toast.makeText(this, "$position", Toast.LENGTH_SHORT).show()
+    private fun updateWord(position: Int, isPlaying: Boolean) {
+        wordTopicViewModel.updatePlayState(title, position, isPlaying)
+        wordTopicListAdapter.notifyItemChanged(position)
+    }
+
+    override fun onClickPlayMusic(position: Int, musicRes: Int?) {
+        releaseMediaPlayer()
+        if (prevClickedPosition != -1 && prevClickedPosition != position) updateWord(prevClickedPosition, false)
+        updateWord(position, prevClickedPosition != position)
+        prevClickedPosition = if(prevClickedPosition == position) -1 else position
+
+        if(prevClickedPosition != -1 && musicRes != null) {
+            Log.d("PlayMusic", "Playing the music");
+            mediaPlayer = MediaPlayer.create(this, musicRes)
+            mediaPlayer.start()
+            mediaPlayer.setOnCompletionListener {
+                onClickPlayMusic(position, null)
+            }
+        }
+    }
+    private fun releaseMediaPlayer(){
+        if(this::mediaPlayer.isInitialized) {
+            mediaPlayer.release()
+        }
     }
 }
