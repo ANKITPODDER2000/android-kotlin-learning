@@ -8,4 +8,5 @@ data class Word(
     val translatedWord: String,
     @DrawableRes val drawableRes: Int?,
     @RawRes val audio: Int,
+    var isPlaying: Boolean = false
 )

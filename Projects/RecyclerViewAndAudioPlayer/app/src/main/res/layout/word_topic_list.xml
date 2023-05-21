@@ -24,11 +24,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:orientation="horizontal"
             android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
@@ -52,6 +54,16 @@
                     android:textAlignment="center"
                     android:textSize="20dp"
                     tools:text="Demo 2" />
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="96dp"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/ivPlayPause"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    tools:src="@drawable/baseline_play_circle_outline_24" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
