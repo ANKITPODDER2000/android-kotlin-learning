@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.petsapp.R
 
-class PetsViewFragment : Fragment() {
+class PetInsertFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return inflater.inflate(R.layout.fragment_pets_view, container, false)
+        return inflater.inflate(R.layout.fragment_pet_insert, container, false)
     }
 
 }

@@ -3,13 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.PetsCountFragment">
+    tools:context=".fragment.PetInsertFragment">
 
     <TextView
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Pets Count Fragment"
-        android:textAlignment="center" />
+        android:text="Insert new Pet..." />
 
 </LinearLayout>

@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.petsapp.R
 
-class PetsCountFragment : Fragment() {
+class PetViewFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return inflater.inflate(R.layout.fragment_pets_count, container, false)
+        return inflater.inflate(R.layout.fragment_pet_view, container, false)
     }
 
 }
