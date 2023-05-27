@@ -64,4 +64,17 @@ class PetDBHelper private constructor(context: Context) : IDBOperation {
             null
         )
     }
+
+    fun getPetRecords(): List<Pet> {
+        val pets = mutableListOf<Pet>()
+        val cursor = getRecords()
+        while(cursor.moveToNext()) {
+            val petName = cursor.getString(cursor.getColumnIndexOrThrow(PetContracts.PetInfo.PET_NAME))
+            val petBreed = cursor.getString(cursor.getColumnIndexOrThrow(PetContracts.PetInfo.PET_BREED))
+            val petGender = cursor.getInt(cursor.getColumnIndexOrThrow(PetContracts.PetInfo.PET_GENDER))
+            val petAge = cursor.getInt(cursor.getColumnIndexOrThrow(PetContracts.PetInfo.PET_AGE))
+            pets.add(Pet(petName, petAge, petGender, petBreed))
+        }
+        return pets
+    }
 }

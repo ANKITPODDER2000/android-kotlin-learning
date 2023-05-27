@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragment.PetViewFragment">
 
     <TextView
-        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="View Pets" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:text="View Pets"
+        android:textAlignment="center"
+        android:layout_marginBottom="16dp"
+        android:textSize="24sp" />
 
-</FrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/flPetList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+</LinearLayout>
