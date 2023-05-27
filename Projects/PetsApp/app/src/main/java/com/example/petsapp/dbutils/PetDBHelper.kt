@@ -65,6 +65,11 @@ class PetDBHelper private constructor(context: Context) : IDBOperation {
         )
     }
 
+    override fun deletePet(id: Int) : Boolean {
+        val deletedRows = mDb.delete(PetContracts.PetInfo.TABLE_NAME, "${PetContracts.PetInfo._ID} = ?", arrayOf(id.toString()))
+        return deletedRows == 1
+    }
+
     fun getPetRecords(): List<Pet> {
         val pets = mutableListOf<Pet>()
         val cursor = getRecords()

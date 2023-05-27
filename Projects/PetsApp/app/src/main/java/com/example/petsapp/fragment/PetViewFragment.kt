@@ -45,7 +45,17 @@ class PetViewFragment : Fragment(), PetAdapter.OnDeleteClickListener {
     }
 
     override fun onClick(petId: Int) {
-        Toast.makeText(requireContext(), "Delete Clicked with id : $petId", Toast.LENGTH_SHORT).show()
+        val isDeleted = PetDBHelper.getInstance(requireContext()).deletePet(petId)
+        isDeleted.takeIf { it }.run {
+            val pos = getPosition(petId)
+            pets.removeAt(pos)
+            petAdapter.notifyDataSetChanged()
+        }
     }
-
+    fun getPosition(id: Int) : Int {
+        for(i in 0 until pets.size) {
+            if(pets[i].id == id) return i
+        }
+        return -1
+    }
 }

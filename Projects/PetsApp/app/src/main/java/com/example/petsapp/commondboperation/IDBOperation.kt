@@ -12,4 +12,5 @@ interface IDBOperation {
         selectionArgs: Array<String>? = null,
         sortValue: String? = null,
     ): Cursor
+    fun deletePet(id: Int): Boolean
 }
