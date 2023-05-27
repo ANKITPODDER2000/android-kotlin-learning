@@ -13,11 +13,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.petsapp.R
 import com.example.petsapp.databinding.FragmentPetInsertBinding
-import com.example.petsapp.dbutils.Pet
+import com.example.petsapp.entityhelper.Pet
 import com.example.petsapp.dbutils.PetContracts.PetInfo.Companion.PET_GENDER_FEMALE
 import com.example.petsapp.dbutils.PetContracts.PetInfo.Companion.PET_GENDER_MALE
 import com.example.petsapp.dbutils.PetDBHelper
-import com.example.petsapp.dbutils.PetHelper
+import com.example.petsapp.entityhelper.PetHelper
 
 class PetInsertFragment : Fragment() {
     private lateinit var binding: FragmentPetInsertBinding

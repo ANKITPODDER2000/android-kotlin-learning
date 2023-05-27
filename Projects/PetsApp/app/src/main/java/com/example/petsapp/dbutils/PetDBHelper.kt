@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import com.example.petsapp.entityhelper.Pet
 
 class PetDBHelper private constructor(context: Context) {
     private val mPetDBOpenHelper: PetDBOpenHelper

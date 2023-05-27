@@ -1,4 +1,4 @@
-package com.example.petsapp.dbutils
+package com.example.petsapp.entityhelper
 
 import kotlin.random.Random
 
