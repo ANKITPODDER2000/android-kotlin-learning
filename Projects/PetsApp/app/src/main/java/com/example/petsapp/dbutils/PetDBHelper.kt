@@ -73,7 +73,8 @@ class PetDBHelper private constructor(context: Context) : IDBOperation {
             val petBreed = cursor.getString(cursor.getColumnIndexOrThrow(PetContracts.PetInfo.PET_BREED))
             val petGender = cursor.getInt(cursor.getColumnIndexOrThrow(PetContracts.PetInfo.PET_GENDER))
             val petAge = cursor.getInt(cursor.getColumnIndexOrThrow(PetContracts.PetInfo.PET_AGE))
-            pets.add(Pet(petName, petAge, petGender, petBreed))
+            val id = cursor.getInt(cursor.getColumnIndexOrThrow(PetContracts.PetInfo._ID))
+            pets.add(Pet(petName, petAge, petGender, petBreed, id))
         }
         return pets
     }

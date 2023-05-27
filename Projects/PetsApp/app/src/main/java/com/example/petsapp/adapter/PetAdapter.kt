@@ -8,8 +8,12 @@ import com.example.petsapp.databinding.PetListBinding
 import com.example.petsapp.dbutils.PetContracts
 import com.example.petsapp.entityhelper.Pet
 
-class PetAdapter(private val petList: List<Pet>) :
+class PetAdapter(private val petList: List<Pet>, val onDeleteClickListener: OnDeleteClickListener) :
     RecyclerView.Adapter<PetAdapter.PetViewHolder>() {
+
+    interface OnDeleteClickListener {
+        fun onClick(petId: Int)
+    }
 
     class PetViewHolder(val binding: PetListBinding) : ViewHolder(binding.root)
 
@@ -29,6 +33,11 @@ class PetAdapter(private val petList: List<Pet>) :
                 else -> "F"
             }
             tvPetAge.text = "Age : ${petList[position].petAge}"
+
+            ivDelete.setOnClickListener {
+                onDeleteClickListener.onClick(petList[position].id ?: -1)
+            }
+
         }
     }
 }
