@@ -17,13 +17,8 @@ class PetCountFragment : Fragment() {
     ): View {
         binding = FragmentPetCountBinding.inflate(layoutInflater, container, false)
 
-        val db = PetDBHelper.getInstance(requireContext()).open()
-        val cursor =
-            db.query(PetContracts.PetInfo.TABLE_NAME, null, null, null, null, null, null, null)
-        binding.tvPetCount.text = "Total no of pets : ${cursor.count}"
-
-        cursor.close()
-
+        val petCount = PetDBHelper.getInstance(requireContext()).getPetCount()
+        binding.tvPetCount.text = "Total no of pets : $petCount"
 
         return binding.root
     }

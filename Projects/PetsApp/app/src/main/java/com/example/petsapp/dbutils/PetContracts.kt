@@ -22,7 +22,7 @@ class PetContracts : BaseColumns {
             const val PET_GENDER_MALE = 1
 
             const val CREATE_STATEMENT = "CREATE TABLE IF NOT EXISTS $TABLE_NAME (" +
-                    "$_ID INTEGER PRIMARY KEY , " +
+                    "$_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "$PET_NAME TEXT NOT NULL, " +
                     "$PET_AGE INTEGER NOT NULL, " +
                     "$PET_BREED TEXT, " +

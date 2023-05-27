@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
-            android:text="View Count" />
+            android:text="Count" />
 
         <Button
             android:id="@+id/btnViewTable"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
-            android:text="View Pets" />
+            android:text="View" />
 
         <Button
             android:id="@+id/btnInsertRecord"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
-            android:text="Insert Pet" />
+            android:text="Insert" />
 
     </LinearLayout>
 
@@ -45,7 +45,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"/>
 
 </LinearLayout>
