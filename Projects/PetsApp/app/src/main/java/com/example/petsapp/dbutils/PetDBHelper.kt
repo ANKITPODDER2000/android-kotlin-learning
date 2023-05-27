@@ -4,9 +4,10 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import com.example.petsapp.commondboperation.IDBOperation
 import com.example.petsapp.entityhelper.Pet
 
-class PetDBHelper private constructor(context: Context) {
+class PetDBHelper private constructor(context: Context) : IDBOperation {
     private val mPetDBOpenHelper: PetDBOpenHelper
     private val mDb: SQLiteDatabase
 
@@ -16,7 +17,7 @@ class PetDBHelper private constructor(context: Context) {
     }
 
     companion object {
-        var sInstance: PetDBHelper? = null
+        private var sInstance: PetDBHelper? = null
 
         fun getInstance(context: Context): PetDBHelper {
             if (sInstance == null) sInstance = PetDBHelper(context)
@@ -35,30 +36,31 @@ class PetDBHelper private constructor(context: Context) {
         }
     }
 
-    fun open(): SQLiteDatabase {
-        return mDb
+    override fun insertPet(value: ContentValues?) {
+        mDb.insert(PetContracts.PetInfo.TABLE_NAME, null, value)
     }
 
-    fun insertPet(values: ContentValues?) {
-        mDb.insert(PetContracts.PetInfo.TABLE_NAME, null, values)
-    }
-
-    fun getPetCount(): Int {
-        val cursor = getPetRecords()
+    override fun getPetCount(): Int {
+        val cursor = getRecords()
         val petCount = cursor.count
         cursor.close()
         return petCount
     }
 
-    private fun getPetRecords(): Cursor {
+    override fun getRecords(
+        projection: Array<String>?,
+        selection: String?,
+        selectionArgs: Array<String>?,
+        sortValue: String?,
+    ): Cursor {
         return mDb.query(
             PetContracts.PetInfo.TABLE_NAME,
+            projection,
+            selection,
+            selectionArgs,
             null,
             null,
-            null,
-            null,
-            null,
-            null,
+            sortValue,
             null
         )
     }
