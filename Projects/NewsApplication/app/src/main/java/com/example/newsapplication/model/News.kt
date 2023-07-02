@@ -3,7 +3,6 @@ package com.example.newsapplication.model
 import com.google.gson.annotations.SerializedName
 
 data class News(
-    @SerializedName("source")
     val source: Source,
     val author: String?,
     val title: String?,

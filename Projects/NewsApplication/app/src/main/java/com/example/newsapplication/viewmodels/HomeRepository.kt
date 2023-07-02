@@ -2,10 +2,8 @@ package com.example.newsapplication.viewmodels
 
 import android.content.Context
 import android.database.Cursor
-import android.os.HandlerThread
 import android.util.Log
 import com.example.newsapplication.api.NewsApi
-import com.example.newsapplication.api.ResponseCallBack
 import com.example.newsapplication.architecture.contracts.HomeContract
 import com.example.newsapplication.constants.UtilityConstants
 import com.example.newsapplication.db.DBHelper
@@ -22,7 +20,6 @@ class HomeRepository @Inject constructor(
     private val newsApi: NewsApi,
 ) : HomeContract.Model.Repository {
 
-    private lateinit var homeViewModelHandler: HomeViewModelHandler
     private lateinit var dbHelper: DBHelper
 
     override fun initializeDB(context: Context) {
@@ -35,13 +32,12 @@ class HomeRepository @Inject constructor(
     ) {
         // After getting the data from API, it will send the data to Presenter, and Presenter can store data in ViewModel directly
         runBlocking(Dispatchers.IO) {
-            HandlerThread("thread1").apply {
-                start()
-                val callback = ResponseCallBack()
-                homeViewModelHandler = HomeViewModelHandler(category, downloadListener, callback, looper)
-                callback.setHandler(homeViewModelHandler)
-                val response = newsApi.getTopHeadLines("in", category, UtilityConstants.API_KEY, 3)
-                response.enqueue(callback)
+            val response = newsApi.getTopHeadLines("in", category, UtilityConstants.API_KEY, 3)
+            if (response.isSuccessful) {
+                val responseBody = response.body()
+                responseBody?.let {
+                    downloadListener.onNewsDownloadFinish(NewsCategory(category, responseBody.articles as ArrayList<News>))
+                }
             }
         }
     }
@@ -50,8 +46,9 @@ class HomeRepository @Inject constructor(
         downloadListener: HomeContract.Presenter.DownloadListener,
         category: String,
     ): Boolean {
-        val cursor: Cursor? = dbHelper.queryNews("${NewsContract.TopNews.CATEGORY} = ?", arrayListOf(category))
-        if(cursor == null || cursor.count == 0) {
+        val cursor: Cursor? =
+            dbHelper.queryNews("${NewsContract.TopNews.CATEGORY} = ?", arrayListOf(category))
+        if (cursor == null || cursor.count == 0) {
             downloadListener.onDataDownloadError()
             return false
         }
@@ -75,7 +72,10 @@ class HomeRepository @Inject constructor(
         }
     }
 
-    override suspend fun isNewsAvailableInDB(downloadListener: HomeContract.Presenter.DownloadListener, category: String): Boolean {
+    override suspend fun isNewsAvailableInDB(
+        downloadListener: HomeContract.Presenter.DownloadListener,
+        category: String,
+    ): Boolean {
         return getNewsFromDB(downloadListener, category)
     }
 
