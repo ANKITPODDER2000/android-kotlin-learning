@@ -10,10 +10,13 @@ import com.example.newsapplication.adapter.NewsCategoryAdapter
 import com.example.newsapplication.architecture.contracts.HomeContract
 import com.example.newsapplication.architecture.presenter.HomePresenter
 import com.example.newsapplication.databinding.ActivityHomeBinding
-import com.example.newsapplication.model.NewsCategory
 import com.example.newsapplication.viewmodels.HomeRepository
 import com.example.newsapplication.viewmodels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -22,7 +25,9 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
     private lateinit var adapter: NewsCategoryAdapter
     private lateinit var presenter: HomePresenter
     private val viewModel: HomeViewModel by viewModels()
-    @Inject lateinit var homeRepository: HomeRepository
+
+    @Inject
+    lateinit var homeRepository: HomeRepository
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
@@ -46,24 +51,22 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
     }
 
     override fun createAdapter() {
-        adapter = NewsCategoryAdapter()
-        binding.rvNewsCategory.also {
-            it.adapter = adapter
-            it.layoutManager = LinearLayoutManager(this)
+        CoroutineScope(Dispatchers.Main).launch {
+            adapter = NewsCategoryAdapter()
+            binding.rvNewsCategory.also {
+                it.adapter = adapter
+                it.layoutManager = LinearLayoutManager(this@HomeActivity)
+            }
+            homeRepository.dataFlow
+                .collect {
+                    Log.d("DEBUG_ANKIT", "collector is called")
+                    adapter.updateCategoryList(it, presenter)
+                }
         }
     }
 
     override fun hideProgress() {
         binding.pbNewsCategory.visibility = View.GONE
         binding.rvNewsCategory.visibility = View.VISIBLE
-    }
-
-    override fun updateAdapterNewsCategory(
-        newsCategory: ArrayList<NewsCategory>,
-        setAdapter: HomeContract.Presenter.AdapterListener,
-    ) {
-        runOnUiThread {
-            adapter.updateCategoryList(newsCategory, setAdapter)
-        }
     }
 }

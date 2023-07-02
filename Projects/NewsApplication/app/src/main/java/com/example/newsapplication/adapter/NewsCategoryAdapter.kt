@@ -33,10 +33,8 @@ class NewsCategoryAdapter @Inject constructor() : Adapter<NewsCategoryAdapter.Ne
         }
     }
 
-    fun updateCategoryList(newsCategoryList: ArrayList<NewsCategory>, setAdapter: HomeContract.Presenter.AdapterListener) {
-        // Todo : need to optimize this using DiffUtil
-        mNewsCategoryList.clear()
-        mNewsCategoryList.addAll(newsCategoryList)
+    fun updateCategoryList(newsCategoryList: NewsCategory, setAdapter: HomeContract.Presenter.AdapterListener) {
+        mNewsCategoryList.add(newsCategoryList)
         this.notifyItemInserted(mNewsCategoryList.size-1)
         setAdapter.onAdapterSetFinish()
     }

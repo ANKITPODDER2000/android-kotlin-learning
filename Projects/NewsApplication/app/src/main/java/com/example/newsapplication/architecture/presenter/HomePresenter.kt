@@ -29,6 +29,7 @@ class HomePresenter (
                     Log.d("DEBUG_ANKIT", "setContentOfHomeScreen: ${Thread.currentThread().name}")
                     repository.setViewModel(model)
                     model.initializeDB(context)
+                    Log.d("DEBUG_ANKIT", "Going to call fetchTopNews")
                     repository.fetchTopNews(
                         this@HomePresenter, UtilityConstants.NEWS_CATEGORY
                     )
@@ -45,10 +46,7 @@ class HomePresenter (
 
 
     override fun onNewsDownloadFinish(newsCategory: NewsCategory, needToUpdateLocalDB: Boolean) {
-        runBlocking(Dispatchers.IO) {
-            view.updateAdapterNewsCategory(repository.getTopNews(), this@HomePresenter)
-            if(needToUpdateLocalDB) model.insertNewsInDB(newsCategory.title, newsCategory.news)
-        }
+
     }
 
     override fun onDataDownloadError() {}

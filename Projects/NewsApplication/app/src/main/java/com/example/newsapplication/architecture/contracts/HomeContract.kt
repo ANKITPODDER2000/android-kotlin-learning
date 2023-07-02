@@ -24,7 +24,6 @@ interface HomeContract {
         fun showProgress()
         fun hideProgress()
         fun createAdapter()
-        fun updateAdapterNewsCategory(newsCategory: ArrayList<NewsCategory>, setAdapter: Presenter.AdapterListener)
     }
 
     interface Presenter {
