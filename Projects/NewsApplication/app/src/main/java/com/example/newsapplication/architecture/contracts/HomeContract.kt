@@ -7,16 +7,16 @@ import com.example.newsapplication.model.NewsCategory
 interface HomeContract {
     interface Model {
         interface ViewModel {
-            val allNewsCategory: ArrayList<NewsCategory>
-            fun insertNewsCategory(newsCategory: NewsCategory)
+            fun initializeDB(context: Context)
+            suspend fun getNewsFromDB(category: String): NewsCategory?
+            suspend fun insertNewsInDB(title: String, news: List<News>)
+
         }
         interface Repository {
-            fun initializeDB(context: Context)
-            suspend fun getNewsFromAPI(downloadListener: Presenter.DownloadListener, category: String)
-            suspend fun getNewsFromDB(downloadListener: Presenter.DownloadListener, category: String): Boolean
-            suspend fun insertNewsInDB(title: String, news: List<News>)
-            suspend fun isNewsAvailableInDB(downloadListener: Presenter.DownloadListener, category: String): Boolean
-            suspend fun getTopNews(downloadListener: Presenter.DownloadListener, categories: ArrayList<String>)
+            fun getTopNews(): ArrayList<NewsCategory>
+            suspend fun getNewsFromAPI(category: String): NewsCategory?
+            suspend fun fetchTopNews(downloadListener: Presenter.DownloadListener, categories: ArrayList<String>)
+            fun setViewModel(model: ViewModel)
         }
     }
 

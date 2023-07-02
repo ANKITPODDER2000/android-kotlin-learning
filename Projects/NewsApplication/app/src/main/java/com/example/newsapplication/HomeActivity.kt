@@ -41,10 +41,8 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
     }
 
     override fun showProgress() {
-        Log.d("DEBUG_ANKIT", "showProgress: is called")
         binding.pbNewsCategory.visibility = View.VISIBLE
         binding.rvNewsCategory.visibility = View.GONE
-        Log.d("DEBUG_ANKIT", "showProgress: is ended")
     }
 
     override fun createAdapter() {

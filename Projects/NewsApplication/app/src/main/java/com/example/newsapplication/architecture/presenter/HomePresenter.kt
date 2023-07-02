@@ -27,8 +27,9 @@ class HomePresenter (
             Handler(looper).postDelayed({
                 CoroutineScope(Dispatchers.IO).launch {
                     Log.d("DEBUG_ANKIT", "setContentOfHomeScreen: ${Thread.currentThread().name}")
-                    repository.initializeDB(context)
-                    repository.getTopNews(
+                    repository.setViewModel(model)
+                    model.initializeDB(context)
+                    repository.fetchTopNews(
                         this@HomePresenter, UtilityConstants.NEWS_CATEGORY
                     )
                 }
@@ -45,9 +46,8 @@ class HomePresenter (
 
     override fun onNewsDownloadFinish(newsCategory: NewsCategory, needToUpdateLocalDB: Boolean) {
         runBlocking(Dispatchers.IO) {
-            model.insertNewsCategory(newsCategory)
-            view.updateAdapterNewsCategory(model.allNewsCategory, this@HomePresenter)
-            if(needToUpdateLocalDB) repository.insertNewsInDB(newsCategory.title, newsCategory.news)
+            view.updateAdapterNewsCategory(repository.getTopNews(), this@HomePresenter)
+            if(needToUpdateLocalDB) model.insertNewsInDB(newsCategory.title, newsCategory.news)
         }
     }
 
