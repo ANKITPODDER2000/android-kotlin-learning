@@ -1,6 +1,6 @@
 package com.example.newsapplication.adapter
 
-import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,9 +9,8 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.newsapplication.architecture.contracts.HomeContract
 import com.example.newsapplication.databinding.NewsCategoryBinding
 import com.example.newsapplication.model.NewsCategory
-import javax.inject.Inject
 
-class NewsCategoryAdapter @Inject constructor() : Adapter<NewsCategoryAdapter.NewsCategoryViewHolder>() {
+class NewsCategoryAdapter : Adapter<NewsCategoryAdapter.NewsCategoryViewHolder>() {
     private val mNewsCategoryList = arrayListOf<NewsCategory>()
     inner class NewsCategoryViewHolder(val binding: NewsCategoryBinding) : ViewHolder(binding.root)
 

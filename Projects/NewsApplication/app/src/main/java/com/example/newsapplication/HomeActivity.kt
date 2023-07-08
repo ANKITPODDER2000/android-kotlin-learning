@@ -1,7 +1,6 @@
 package com.example.newsapplication
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +14,6 @@ import com.example.newsapplication.viewmodels.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -59,7 +57,6 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
             }
             homeRepository.dataFlow
                 .collect {
-                    Log.d("DEBUG_ANKIT", "collector is called")
                     adapter.updateCategoryList(it, presenter)
                 }
         }
