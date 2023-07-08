@@ -19,7 +19,7 @@ class Service1 : Service() {
     inner class ServiceHandler(looper: Looper) : Handler(looper) {
         override fun handleMessage(msg: Message) {
             try {
-                Thread.sleep(2000)
+                Thread.sleep(10000)
             } catch (e: InterruptedException) {
                 Thread.currentThread().interrupt()
             }

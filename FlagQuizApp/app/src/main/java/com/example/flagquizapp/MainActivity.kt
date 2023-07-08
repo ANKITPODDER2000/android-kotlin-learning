@@ -2,13 +2,13 @@ package com.example.flagquizapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flagquizapp.databinding.ActivityMainBinding
+import com.example.flagquizapp.lifecycle.MainLifeCycleObserver
 import com.example.flagquizapp.util.Security
 
 class MainActivity : AppCompatActivity() {
@@ -19,13 +19,12 @@ class MainActivity : AppCompatActivity() {
             "In OnCreate Method.  value of isUnlock is : ${Security.isUnlock}  : ${this.localClassName}"
         )
         super.onCreate(savedInstanceState)
+        lifecycle.addObserver(MainLifeCycleObserver())
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
-
-        // Intent(this, SetPinActivity::class.java).also { startActivityForResult(it, 2) }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -44,69 +43,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        Log.d(
-            "DEBUG_ANKIT",
-            "OnResume is Called.  value of isUnlock is : ${Security.isUnlock}  : ${this.localClassName}"
-        )
         if (!Security.isUnlock)
             Intent(this, SetPinActivity::class.java).also {
                 startActivityForResult(it, 2)
             }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d("DEBUG_ANKIT", "OnStart method is Called : ${this.localClassName}")
-
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d("DEBUG_ANKIT", "onPause method is Called : ${this.localClassName}")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("DEBUG_ANKIT", "onStop method is Called : ${this.localClassName}")
-        Security.setIsUnlock(false)
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.d(
-            "DEBUG_ANKIT",
-            "onRestart method is Called :  value of isUnlock is : ${Security.isUnlock} : ${this.localClassName}"
-        )
-        if (!Security.isUnlock)
-            Intent(this, SetPinActivity::class.java).also {
-                startActivityForResult(it, 2)
-            }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
-        super.onSaveInstanceState(outState, outPersistentState)
-        Log.d(
-            "DEBUG_ANKIT",
-            "onSaveInstanceState method is Called :  value of isUnlock is : ${Security.isUnlock} : ${this.localClassName}"
-        )
-    }
-
-    override fun onRestoreInstanceState(
-        savedInstanceState: Bundle?,
-        persistentState: PersistableBundle?,
-    ) {
-        super.onRestoreInstanceState(savedInstanceState, persistentState)
-        Log.d(
-            "DEBUG_ANKIT",
-            "onRestoreInstanceState method is Called :  value of isUnlock is : ${Security.isUnlock} : ${this.localClassName}"
-        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Log.d(
-            "DEBUG_ANKIT",
-            "On Activity Result for result code : $requestCode  : ${this.localClassName}"
-        )
+        if(resultCode == RESULT_CANCELED && requestCode == 2) finish()
     }
 }
