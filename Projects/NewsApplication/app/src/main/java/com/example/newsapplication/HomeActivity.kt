@@ -49,12 +49,12 @@ class HomeActivity : AppCompatActivity(), HomeContract.View {
     }
 
     override fun createAdapter() {
+        adapter = NewsCategoryAdapter()
+        binding.rvNewsCategory.also {
+            it.adapter = adapter
+            it.layoutManager = LinearLayoutManager(this@HomeActivity)
+        }
         CoroutineScope(Dispatchers.Main).launch {
-            adapter = NewsCategoryAdapter()
-            binding.rvNewsCategory.also {
-                it.adapter = adapter
-                it.layoutManager = LinearLayoutManager(this@HomeActivity)
-            }
             homeRepository.dataFlow
                 .collect {
                     adapter.updateCategoryList(it, presenter)

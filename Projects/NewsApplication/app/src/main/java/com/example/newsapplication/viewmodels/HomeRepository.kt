@@ -62,6 +62,8 @@ class HomeRepository @Inject constructor(
                 val newsCategory = viewModel.getNewsFromDB(category) ?: getNewsFromAPI(category)
                 newsCategory?.run {
                     _dataFlow.emit(this)
+                    val newNewsCategory = getNewsFromAPI(category)
+                    if(newNewsCategory != null) _dataFlow.emit(newNewsCategory)
                 }
             }
         }

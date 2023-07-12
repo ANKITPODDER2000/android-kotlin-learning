@@ -1,6 +1,7 @@
 package com.example.newsapplication.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,6 +10,10 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.newsapplication.architecture.contracts.HomeContract
 import com.example.newsapplication.databinding.NewsCategoryBinding
 import com.example.newsapplication.model.NewsCategory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class NewsCategoryAdapter : Adapter<NewsCategoryAdapter.NewsCategoryViewHolder>() {
     private val mNewsCategoryList = arrayListOf<NewsCategory>()
@@ -33,8 +38,20 @@ class NewsCategoryAdapter : Adapter<NewsCategoryAdapter.NewsCategoryViewHolder>(
     }
 
     fun updateCategoryList(newsCategoryList: NewsCategory, setAdapter: HomeContract.Presenter.AdapterListener) {
-        mNewsCategoryList.add(newsCategoryList)
-        this.notifyItemInserted(mNewsCategoryList.size-1)
+        CoroutineScope(Dispatchers.Unconfined).launch {
+            Log.d("DEBUG_ANKIT", "updateCategoryList: Thread is : ${Thread.currentThread().name}")
+            for(i in 0  until  mNewsCategoryList.size) {
+                if(mNewsCategoryList[i].title == newsCategoryList.title) {
+                    mNewsCategoryList[i] = newsCategoryList;
+                    withContext(Dispatchers.Main) {
+                        this@NewsCategoryAdapter.notifyItemChanged(i+1)
+                    }
+                    return@launch
+                }
+            }
+            mNewsCategoryList.add(newsCategoryList)
+            this@NewsCategoryAdapter.notifyItemInserted(mNewsCategoryList.size-1)
+        }
         setAdapter.onAdapterSetFinish()
     }
 }
