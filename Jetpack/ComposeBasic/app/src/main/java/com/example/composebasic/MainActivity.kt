@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.composebasic.ui.theme.ComposeBasicTheme
@@ -32,7 +31,7 @@ class MainActivity : ComponentActivity() {
                 Surface(
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting(this@MainActivity,"Android")
+                    Greeting(this@MainActivity, "Android")
                 }
             }
         }
@@ -68,6 +67,20 @@ fun Greeting(context: Context?, name: String, modifier: Modifier = Modifier) {
                 .fillMaxWidth(1f)
         ) {
             Text(text = "Birthday Greeting")
+        }
+        Button(
+            onClick = {
+                context?.let {
+                    Intent(context, DiceRollActivity::class.java).also {
+                        context.startActivity(it)
+                    }
+                }
+            },
+            modifier = Modifier
+                .padding(0.dp, 16.dp, 0.dp, 0.dp)
+                .fillMaxWidth(1f)
+        ) {
+            Text(text = "Dice Roll")
         }
     }
 }

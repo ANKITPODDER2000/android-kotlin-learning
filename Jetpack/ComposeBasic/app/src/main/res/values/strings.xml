@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ComposeBasic</string>
+    <string name="roll_dice">Roll</string>
+    <string name="currently_showing_dice_no">Currently showing dice no : %1$s</string>
 </resources>
