@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -54,33 +55,47 @@ fun Greeting(context: Context?, name: String, modifier: Modifier = Modifier) {
             fontSize = 24.sp,
             textAlign = TextAlign.Center
         )
-        Button(
-            onClick = {
-                context?.let {
-                    Intent(context, BirthdayWish::class.java).also {
-                        context.startActivity(it)
-                    }
+        BtnToOpenNewIntent(
+            context = context,
+            className = BirthdayWish::class.java,
+            btnTitle = stringResource(R.string.birth_day_greeting)
+        )
+        BtnToOpenNewIntent(
+            context = context,
+            className = DiceRollActivity::class.java,
+            btnTitle = stringResource(R.string.roll_dice_proj)
+        )
+        BtnToOpenNewIntent(
+            context = context,
+            className = TipCalculatorActivity::class.java,
+            btnTitle = stringResource(R.string.calculate_tip_proj)
+        )
+        BtnToOpenNewIntent(
+            context = context,
+            className = ArtSpaceActivity::class.java,
+            btnTitle = stringResource(R.string.art_space_proj)
+        )
+        BtnToOpenNewIntent(
+            context = context,
+            className = AffirmationActivity::class.java,
+            btnTitle = stringResource(R.string.affirmation_proj)
+        )
+    }
+}
+
+@Composable
+fun BtnToOpenNewIntent(context: Context?, className: Class<*>, btnTitle: String) {
+    Button(
+        onClick = {
+            context?.let { context ->
+                Intent(context, className).also {
+                    context.startActivity(it)
                 }
-            },
-            modifier = Modifier
-                .padding(0.dp, 16.dp, 0.dp, 0.dp)
-                .fillMaxWidth(1f)
-        ) {
-            Text(text = "Birthday Greeting")
-        }
-        Button(
-            onClick = {
-                context?.let {
-                    Intent(context, DiceRollActivity::class.java).also {
-                        context.startActivity(it)
-                    }
-                }
-            },
-            modifier = Modifier
-                .padding(0.dp, 16.dp, 0.dp, 0.dp)
-                .fillMaxWidth(1f)
-        ) {
-            Text(text = "Dice Roll")
-        }
+            }
+        }, modifier = Modifier
+            .padding(0.dp, 16.dp, 0.dp, 0.dp)
+            .fillMaxWidth(1f)
+    ) {
+        Text(text = btnTitle)
     }
 }
