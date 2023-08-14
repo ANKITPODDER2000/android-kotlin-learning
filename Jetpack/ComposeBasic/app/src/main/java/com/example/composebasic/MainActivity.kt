@@ -80,6 +80,11 @@ fun Greeting(context: Context?, name: String, modifier: Modifier = Modifier) {
             className = AffirmationActivity::class.java,
             btnTitle = stringResource(R.string.affirmation_proj)
         )
+        BtnToOpenNewIntent(
+            context = context,
+            className = UnscrambleActivity::class.java,
+            btnTitle = stringResource(R.string.unscramble_game)
+        )
     }
 }
 

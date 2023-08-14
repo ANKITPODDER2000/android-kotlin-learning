@@ -28,4 +28,16 @@
     <string name="affirmation9">Things will unfold at precisely the right time.</string>
     <string name="affirmation10">I will be present in all the moments that this day brings.</string>
     <string name="affirmation_proj">Affirmation Proj</string>
+    <string name="unscramble">Unscramble</string>
+    <string name="game_score">%1$s / 10</string>
+    <string name="unscramble_the_word_using_all_letters">Unscramble the word using all letters.</string>
+    <string name="enter_your_word">Enter your word</string>
+    <string name="submit">Submit</string>
+    <string name="skip">Skip</string>
+    <string name="score">Score : %1$s</string>
+    <string name="unscramble_game">Unscramble Game</string>
+    <string name="congratulations">Congratulations!!!</string>
+    <string name="play_again">Play Again!</string>
+    <string name="exit">Exit.</string>
+    <string name="final_score_msg">Your score is %1$s</string>
 </resources>
