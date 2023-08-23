@@ -85,6 +85,11 @@ fun Greeting(context: Context?, name: String, modifier: Modifier = Modifier) {
             className = UnscrambleActivity::class.java,
             btnTitle = stringResource(R.string.unscramble_game)
         )
+        BtnToOpenNewIntent(
+            context = context,
+            className = CakeAppActivity::class.java,
+            btnTitle = stringResource(R.string.cupcakes_app)
+        )
     }
 }
 
