@@ -3,7 +3,9 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
     id("dagger.hilt.android.plugin")
+    id("kotlin-android")
     id("kotlin-kapt")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -61,7 +63,6 @@ android {
 }
 
 dependencies {
-    val roomVersion = "2.5.2"
 
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
@@ -79,17 +80,26 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    // Dagger dependency
-    implementation("com.google.dagger:hilt-android:2.46.1")
+    // ViewModel Compose
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
+
+    //Dagger - Hilt
+    implementation("com.google.dagger:hilt-android:2.47")
     kapt("com.google.dagger:hilt-android-compiler:2.46.1")
+    kapt("androidx.hilt:hilt-compiler:1.0.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
 
     // Room dependency
+    val roomVersion = "2.5.2"
     implementation("androidx.room:room-runtime:$roomVersion")
     annotationProcessor("androidx.room:room-compiler:$roomVersion")
-}
+    kapt("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
 
-kapt {
-    correctErrorTypes = true
+    val navVersion = "2.5.2"
+    implementation("androidx.navigation:navigation-compose:$navVersion")
+
+    annotationProcessor("android.arch.persistence.room:compiler:1.1.1")
 }
 
 hilt {

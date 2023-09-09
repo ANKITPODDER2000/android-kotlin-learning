@@ -27,3 +27,14 @@ val ColorScheme.scaffoldContainerColor
 val ColorScheme.scaffoldContentColor
     @Composable
     get() = if(isSystemInDarkTheme()) Color(0xFFFCFCFC) else Color.White
+
+
+val ColorScheme.todoContainerColor
+    @Composable
+    get() = if(isSystemInDarkTheme()) Color(0x4D000000) else Color(0x1A000000)
+val ColorScheme.todoItemContainerColor
+    @Composable
+    get() = if(isSystemInDarkTheme()) Color(0XFF000000) else Color(0XFFFFFFFF)
+val ColorScheme.todoContentColor
+    @Composable
+    get() = if(isSystemInDarkTheme()) Color(0XFFFFFFFF) else Color(0XFF000000)
