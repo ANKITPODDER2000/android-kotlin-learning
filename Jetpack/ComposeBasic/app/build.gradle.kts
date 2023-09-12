@@ -67,6 +67,8 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+    implementation("androidx.navigation:navigation-compose:2.6.0")
+
     testImplementation("org.powermock:powermock:1.6.5")
     testImplementation("org.powermock:powermock-module-junit4:1.6.5")
     testImplementation("org.powermock:powermock-api-mockito:1.6.5")
